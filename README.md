@@ -23,6 +23,7 @@ Simple app to apply colored&minimal potato wallpapers I built for my preferred R
 
 It is needed to save wallpapers to internal memory before applying! No grant no party!
 
+# Colors combo taken from [Canva!](https://www.canva.com/learn/100-color-combinations/)
 
 # Notice:
 
