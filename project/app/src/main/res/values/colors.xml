@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorsPanelColor">@android:color/background_light</color>
+
+    <color name="defaultBackgroundColor">#292E33</color>
+    <color name="defaultPotatoColor">#8C9EFF</color>
+
+    <color name="midnightBlue">#1E1F26</color>
+    <color name="ink">#283655</color>
+    <color name="lightBlueBerry">#4D648D</color>
+
+    <color name="darkNavy">#011A27</color>
+    <color name="blueBerry">#063852</color>
+    <color name="daffodil">#E6DF44</color>
+
+    <color name="shadow">#2A3132</color>
+    <color name="mist">#90AFC5</color>
+
+    <color name="crevice">#46211A</color>
+    <color name="desert">#BA5536</color>
+
+    <color name="deepAqua">#003B46</color>
+    <color name="wave">#66A5AD</color>
+
+    <color name="blueBlack">#021C1E</color>
+    <color name="rain">#2C7873</color>
+
+    <color name="bluePine">#324851</color>
+    <color name="reflection">#34675C</color>
+
+    <color name="cocoa">#301B28</color>
+    <color name="chocolate">#523634</color>
+    <color name="toffee">#B6452C</color>
+    <color name="frosting">#DDC5A2</color>
+
+    <color name="slate">#626D71</color>
+    <color name="ceramic">#CDCDC0</color>
+    <color name="latte">#DDBC95</color>
+
+    <color name="eggPlant">#50312F</color>
+    <color name="lemonLime">#E4EA8C</color>
+
+    <color name="cloud">#505160</color>
+    <color name="moss">#AEBD38</color>
+
+    <color name="blue">#4D85BD</color>
+    <color name="sun">#F5E356</color>
+
+    <color name="sky">#375E97</color>
+    <color name="sunflower">#FFBB00</color>
+
+    <color name="sea">#20948B</color>
+    <color name="sandstone">#F4CC70</color>
+
+    <color name="stem">#80BD9E</color>
+    <color name="poppy">#F98866</color>
+
+    <color name="turquoise">#5BC8AC</color>
+    <color name="pinkTulip">#F18D9E</color>
+
+    <color name="branch">#5D535E</color>
+    <color name="berry">#EC96A4</color>
+
+
+    <color name="ice">#A1D6E2</color>
+    <color name="overcast">#F1F1F2</color>
+    <color name="glacier">#1995AD</color>
+
+    <color name="plaster">#F4EADE</color>
+    <color name="greece">#2F496E</color>
+</resources>

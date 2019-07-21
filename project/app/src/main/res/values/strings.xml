@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">PotateDaHome</string>
+    <string name="loading">Fry some potatoes meanwhile&#8230;</string>
+    <string name="time_pattern">dd_MM_yy_hh-ss</string>
+</resources>
