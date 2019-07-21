@@ -16,7 +16,7 @@
 
 # Description:
 
-Simple app to apply colored&minimal potato I built for my preferred Rom, [Potato Open Sauce Project](https://potatoproject.co).
+Simple app to apply colored&minimal potato wallpapers I built for my preferred Rom: [Potato Open Sauce Project](https://potatoproject.co).
 
 
 # About storage permission:
