@@ -11,7 +11,7 @@ import android.util.DisplayMetrics
 import android.view.SurfaceHolder
 import android.view.WindowManager
 
-class PotatoBatteryLP : WallpaperService() {
+class PotateDaHomeLP : WallpaperService() {
 
     private var mBackgroundPaint = Paint()
     private var mPotatoPaint = Paint()

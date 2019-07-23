@@ -26,7 +26,7 @@
         </activity>
 
         <service
-                android:name="com.iven.potatowalls.PotatoBatteryLP"
+                android:name="com.iven.potatowalls.PotateDaHomeLP"
                 android:label="@string/live_wallpaper_name"
                 android:permission="android.permission.BIND_WALLPAPER">
             <intent-filter>

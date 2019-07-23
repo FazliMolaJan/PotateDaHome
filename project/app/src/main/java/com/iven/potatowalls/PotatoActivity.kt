@@ -90,7 +90,7 @@ class PotatoActivity : AppCompatActivity() {
             )
             intent.putExtra(
                 WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT,
-                ComponentName(this, PotatoBatteryLP::class.java)
+                ComponentName(this, PotateDaHomeLP::class.java)
             )
 
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS or Intent.FLAG_ACTIVITY_NO_ANIMATION)
