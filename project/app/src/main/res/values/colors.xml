@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="colorsPanelColor">@android:color/background_light</color>
-
+    <color name="potato">#7A20E1</color>
     <color name="defaultBackgroundColor">#292E33</color>
     <color name="defaultPotatoColor">#8C9EFF</color>
+
+    <color name="bottomBarColor">#FAFAFA</color>
+    <color name="systemBarsColor">#BFBFBF</color>
+    <color name="activityBackground">#FFFFFF</color>
+
+    <color name="bottomBarColorDark">#303030</color>
+    <color name="systemBarsColorDark">#313131</color>
+    <color name="activityBackgroundDark">#424242</color>
+
+    <!--  PRESETS -->
 
     <color name="midnightBlue">#1E1F26</color>
     <color name="ink">#283655</color>

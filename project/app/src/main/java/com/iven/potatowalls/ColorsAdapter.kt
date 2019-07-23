@@ -1,4 +1,4 @@
-package com.iven.potatowallpapers
+package com.iven.potatowalls
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -16,8 +16,6 @@ class ColorsAdapter(@NonNull private val context: Context) :
 
     //first = background color, second = potato color
     private val mColors = listOf(
-        Pair(R.color.defaultBackgroundColor, R.color.defaultPotatoColor),
-
         //from https://www.canva.com/learn/100-color-combinations/
         Pair(R.color.midnightBlue, R.color.ink),
         Pair(R.color.darkNavy, R.color.blueBerry),
@@ -63,12 +61,15 @@ class ColorsAdapter(@NonNull private val context: Context) :
     inner class ColorsHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bindItems(combo: Pair<Int, Int>) {
-            val color = itemView as MaterialCardView
 
-            color.setCardBackgroundColor(ContextCompat.getColor(context, combo.second))
-            color.strokeColor = ContextCompat.getColor(context, combo.first)
+            val colorItem = itemView as MaterialCardView
 
-            itemView.setOnClickListener { onColorClick?.invoke(combo) }
+            colorItem.setCardBackgroundColor(ContextCompat.getColor(context, combo.second))
+            colorItem.strokeColor = ContextCompat.getColor(context, combo.first)
+
+            itemView.setOnClickListener {
+                onColorClick?.invoke(combo)
+            }
         }
     }
 }

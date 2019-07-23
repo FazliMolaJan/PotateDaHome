@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/background_color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/defaultBackgroundColor"
+        android:elevation="16dp"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="16dp"
+        tools:context=".PotatoActivity">
+
+    <LinearLayout
+            android:foreground="?android:attr/selectableItemBackgroundBorderless"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:onClick="startBackgroundPicker"
+            android:layout_height="wrap_content">
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:text="@string/title_background"
+                  android:padding="16dp"
+                  android:id="@+id/background_color_head"
+                  android:textAppearance="@android:style/TextAppearance.Material.Headline"/>
+
+        <TextView android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:text="@string/title_background"
+                  android:id="@+id/background_color_subhead"
+                  android:paddingBottom="16dp"
+                  android:paddingStart="16dp"
+                  android:paddingEnd="16dp"
+                  android:textAppearance="@android:style/TextAppearance.Material.Subhead"/>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

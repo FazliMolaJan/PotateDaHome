@@ -1,4 +1,4 @@
-package com.iven.potatowallpapers
+package com.iven.potatowalls
 
 import android.graphics.Canvas
 import android.graphics.Matrix

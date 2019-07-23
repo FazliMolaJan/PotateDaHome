@@ -8,19 +8,15 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.1"
     defaultConfig {
-        applicationId "com.iven.potatowallpapers"
+        applicationId "com.iven.potatowalls"
         minSdkVersion 27
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        versionCode 4
+        versionName "1.1"
     }
 
-    //retrieve version number
     applicationVariants.all { variant ->
-        variant.resValue "string", "versionName", variant.versionName
-    }
-
+        variant.resValue "string", "versionName", variant.versionName }
 
     buildTypes {
         release {
@@ -32,10 +28,10 @@ android {
 }
 
 dependencies {
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.0.2'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    api 'com.google.android.material:material:1.1.0-alpha08'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.preference:preference:1.1.0-rc01'
+    implementation 'com.afollestad.material-dialogs:core:3.1.0'
+    implementation 'com.afollestad.material-dialogs:color:3.1.0'
+    api 'com.google.android.material:material:1.0.0'
+
 }

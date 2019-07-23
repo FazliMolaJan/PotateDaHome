@@ -1,8 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Base application theme. -->
+
+    <attr name="bottom_bar_color" format="color" />
+    <attr name="icons_color" format="color" />
+    <attr name="presets_text_color" format="color" />
+
+    <!-- Base theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="colorPrimary">@color/defaultBackgroundColor</item>
-        <item name="colorPrimaryDark">@color/defaultBackgroundColor</item>
-        <item name="colorAccent">@color/defaultBackgroundColor</item>
+        <item name="android:colorControlActivated">@color/systemBarsColor</item>
+        <item name="android:colorAccent">@color/systemBarsColor</item>
+        <item name="android:colorPrimary">@color/systemBarsColor</item>
+        <item name="android:colorPrimaryDark">@color/systemBarsColor</item>
+        <item name="android:windowBackground">@color/activityBackground</item>
+        <item name="bottom_bar_color">@color/bottomBarColor</item>
+        <item name="icons_color">@android:color/black</item>
+        <item name="presets_text_color">@android:color/black</item>
+        <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
+    </style>
+
+    <style name="AppTheme.Dark" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:colorControlActivated">@color/systemBarsColorDark</item>
+        <item name="android:colorAccent">@color/systemBarsColorDark</item>
+        <item name="android:colorPrimary">@color/systemBarsColorDark</item>
+        <item name="android:colorPrimaryDark">@color/systemBarsColorDark</item>
+        <item name="android:windowBackground">@color/activityBackgroundDark</item>
+        <item name="bottom_bar_color">@color/bottomBarColorDark</item>
+        <item name="icons_color">@android:color/white</item>
+        <item name="presets_text_color">@android:color/white</item>
+        <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
+    </style>
+
+    <!-- This will set the fade in animation on all the activities by default -->
+    <style name="WindowAnimationTransition">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
     </style>
 </resources>

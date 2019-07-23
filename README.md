@@ -7,7 +7,7 @@
 ###### PotateDaHome!
 ###### Current version: (1) 1.0
 
-![Screenshots](https://raw.githubusercontent.com/enricocid/PotateDaHome/master/potatedahome.gif) 
+![Screenshots](https://raw.githubusercontent.com/enricocid/PotateDaHome/master/potatedahome2.gif) 
 
 # Downloads
 
@@ -16,12 +16,8 @@
 
 # Description:
 
-Simple app to apply colored&minimal potato wallpapers I built for my preferred Rom: [Potato Open Sauce Project](https://potatoproject.co).
+Simple app to apply colored&minimal potato static live wallpapers I built for my preferred Rom: [Potato Open Sauce Project](https://potatoproject.co).
 
-
-# About storage permission:
-
-It is needed to save wallpapers to internal memory before applying! No grant no party!
 
 # Colors combo taken from [Canva!](https://www.canva.com/learn/100-color-combinations/)
 

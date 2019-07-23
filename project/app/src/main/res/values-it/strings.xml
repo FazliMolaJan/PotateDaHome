@@ -1,0 +1,13 @@
+<resources>
+
+    <!-- Titoli cards -->
+    <string name="title_background">Colore sfondo</string>
+    <string name="title_potato">Colore patata</string>
+
+    <!-- Items del menu della BottomBar -->
+    <string name="title_info">Info</string>
+    <string name="title_theme">Tema</string>
+    <string name="title_restore">Ripristina patata default</string>
+
+    <string name="install_browser_message">Installa un browser prima!</string>
+</resources>
