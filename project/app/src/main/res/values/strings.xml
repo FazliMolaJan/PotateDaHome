@@ -12,7 +12,6 @@
     <string name="theme_key" translatable="false">theme_key</string>
 
     <!-- BottomBar menu items -->
-    <string name="title_info">Info</string>
     <string name="title_theme">Theme</string>
     <string name="title_restore">Restore default potato!</string>
 
