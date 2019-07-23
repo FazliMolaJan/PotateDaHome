@@ -16,11 +16,11 @@
 
 # Description:
 
-Simple app to apply colored&minimal potato static live wallpapers I built for my preferred Rom: [Potato Open Sauce Project](https://potatoproject.co).
+Simple app to apply colored & minimal potato static live wallpapers I built for my preferred Rom: [Potato Open Sauce Project (POSP)](https://potatoproject.co).
 
 
 # Credits
-- Colors combo taken from [Canva!](https://github.com/afollestad/material-dialogs)
+- Colors combo taken from [Canva](https://github.com/afollestad/material-dialogs)!
 - Aidan Follestad for beautiful [Material Dialogs](https://www.canva.com/learn/100-color-combinations/) library
 
 
