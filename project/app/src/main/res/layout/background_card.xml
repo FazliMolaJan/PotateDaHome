@@ -6,7 +6,7 @@
         android:id="@+id/background_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/defaultBackgroundColor"
+        app:cardBackgroundColor="@color/default_background_color"
         android:elevation="16dp"
         android:layout_margin="8dp"
         app:cardCornerRadius="16dp"

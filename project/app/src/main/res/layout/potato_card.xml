@@ -7,7 +7,7 @@
         android:id="@+id/potato_color"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/defaultPotatoColor" android:elevation="16dp"
+        app:cardBackgroundColor="@color/default_potato_color" android:elevation="16dp"
         android:layout_margin="8dp" tools:context=".PotatoActivity">
 
     <LinearLayout

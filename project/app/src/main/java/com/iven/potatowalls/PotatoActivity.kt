@@ -179,8 +179,8 @@ class PotatoActivity : AppCompatActivity() {
 
     //restore default background and potato colors
     private fun setDefaultPotato() {
-        val defaultBackgroundColor = ContextCompat.getColor(this, R.color.defaultBackgroundColor)
-        val defaultPotatoColor = ContextCompat.getColor(this, R.color.defaultPotatoColor)
+        val defaultBackgroundColor = ContextCompat.getColor(this, R.color.default_background_color)
+        val defaultPotatoColor = ContextCompat.getColor(this, R.color.default_potato_color)
         setBackgroundColorForUI(defaultBackgroundColor, false)
         setPotatoColorForUI(defaultPotatoColor, false)
 
