@@ -15,6 +15,7 @@ class PotateDaHomeLP : WallpaperService() {
 
     private var mBackgroundPaint = Paint()
     private var mPotatoPaint = Paint()
+    private var mStrokePaint = Paint()
     private var mPotatoPath = Path()
     private var mPotatoMatrix = Matrix()
 
@@ -32,18 +33,36 @@ class PotateDaHomeLP : WallpaperService() {
             mDeviceWidth = d.widthPixels.toFloat()
             mDeviceHeight = d.heightPixels.toFloat()
 
-            //set paints props
-            mBackgroundPaint.isAntiAlias = true
-            val backgroundColor = PotatoActivity.getBackgroundColor(baseContext)
-            mBackgroundPaint.color = backgroundColor
-
-            mPotatoPaint.isAntiAlias = true
-            mPotatoPaint.style = Paint.Style.FILL
-            val potatoColor = PotatoActivity.getPotatoColor(baseContext)
-            mPotatoPaint.color = potatoColor
+            getPaintProps()
         }
 
         return PotatoEngine()
+    }
+
+    private fun getPaintProps() {
+        //set paints props
+        mBackgroundPaint.isAntiAlias = true
+        val backgroundColor = mPotatoPreferences.backgroundColor
+        mBackgroundPaint.color = backgroundColor
+
+        mPotatoPaint.isAntiAlias = true
+        mPotatoPaint.style = Paint.Style.FILL
+        val potatoColor = mPotatoPreferences.potatoColor
+        mPotatoPaint.color = potatoColor
+    }
+
+    private fun checkSystemAccent() {
+
+        val isBackgroundAccented = mPotatoPreferences.isBackgroundAccented
+        val isPotatoAccented = mPotatoPreferences.isPotatoAccented
+
+        if (isBackgroundAccented || isPotatoAccented) {
+            //change only if system accent has changed
+            val systemAccentColor = Utils.getSystemAccentColor(this)
+            if (isBackgroundAccented && mBackgroundPaint.color != systemAccentColor) mBackgroundPaint.color =
+                systemAccentColor
+            if (isPotatoAccented && mPotatoPaint.color != systemAccentColor) mPotatoPaint.color = systemAccentColor
+        }
     }
 
     private inner class PotatoEngine : WallpaperService.Engine() {
@@ -55,6 +74,7 @@ class PotateDaHomeLP : WallpaperService() {
         override fun onVisibilityChanged(visible: Boolean) {
             sVisible = visible
             if (visible) {
+                checkSystemAccent()
                 handler.post(drawRunner)
             } else {
                 handler.removeCallbacks(drawRunner)
@@ -83,7 +103,7 @@ class PotateDaHomeLP : WallpaperService() {
                 if (canvas != null && baseContext != null) {
                     //draw potato!
                     PotatoObject.draw(
-                        canvas, mBackgroundPaint, mPotatoPaint,
+                        canvas, mBackgroundPaint, mPotatoPaint, mStrokePaint,
                         mPotatoMatrix, mPotatoPath, mDeviceWidth, mDeviceHeight
                     )
                 }

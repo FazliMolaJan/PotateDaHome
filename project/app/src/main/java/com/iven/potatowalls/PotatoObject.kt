@@ -12,11 +12,13 @@ object PotatoObject {
         @NonNull c: Canvas?,
         @NonNull backgroundPaint: Paint,
         @NonNull potatoPaint: Paint,
+        @NonNull strokePaint: Paint,
         @NonNull potatoMatrix: Matrix,
         @NonNull potatoPath: Path,
         cw: Float,
         ch: Float
     ) {
+
         //size of the potato calculated from canvas width, change float factor to change it
         val ph = cw * 0.75F
 
@@ -50,5 +52,14 @@ object PotatoObject {
         potatoPath.transform(potatoMatrix)
 
         c?.drawPath(potatoPath, potatoPaint)
+
+        //if the color is the same!
+        if (backgroundPaint.color == potatoPaint.color) {
+            strokePaint.style = Paint.Style.STROKE
+            strokePaint.strokeWidth = 5F
+            strokePaint.isAntiAlias = true
+            strokePaint.color = Utils.getTextColorForCard(backgroundPaint.color)
+            c?.drawPath(potatoPath, strokePaint)
+        }
     }
 }
