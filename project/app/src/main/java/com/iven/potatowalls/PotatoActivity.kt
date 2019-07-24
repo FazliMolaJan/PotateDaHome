@@ -1,7 +1,5 @@
 package com.iven.potatowalls
 
-import android.app.WallpaperManager
-import android.content.ComponentName
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.net.Uri
@@ -31,6 +29,12 @@ class PotatoActivity : AppCompatActivity() {
 
     private lateinit var mFab: FloatingActionButton
 
+    private var sBackgroundColorChanged = false
+    private var sPotatoColorChanged = false
+    private var sDefaultColorsRestored = false
+    private var sBackgroundAccentSet = false
+    private var sPotatoAccentSet = false
+
     override fun onResume() {
         super.onResume()
         //check if accent theme has changed
@@ -51,15 +55,28 @@ class PotatoActivity : AppCompatActivity() {
 
         //apply live wallpaper on fab click!
         mFab.setOnClickListener {
-            val intent = Intent(
-                WallpaperManager.ACTION_CHANGE_LIVE_WALLPAPER
-            )
-            intent.putExtra(
-                WallpaperManager.EXTRA_LIVE_WALLPAPER_COMPONENT,
-                ComponentName(this, PotateDaHomeLP::class.java)
-            )
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS or Intent.FLAG_ACTIVITY_NO_ANIMATION)
-            startActivity(intent)
+
+            //do all the save shit here
+            if (sBackgroundColorChanged) {
+                mPotatoPreferences.isBackgroundAccented = false
+                mPotatoPreferences.backgroundColor = mBackgroundColor
+            }
+            if (sPotatoColorChanged) {
+                mPotatoPreferences.isPotatoAccented = false
+                mPotatoPreferences.potatoColor = mPotatoColor
+            }
+            if (sBackgroundAccentSet) {
+                mPotatoPreferences.isBackgroundAccented = true
+                mPotatoPreferences.backgroundColor = mBackgroundColor
+            }
+            if (sPotatoAccentSet) {
+                mPotatoPreferences.isPotatoAccented = true
+                mPotatoPreferences.potatoColor = mBackgroundColor
+            }
+
+            if (sDefaultColorsRestored) mPotatoPreferences.clear()
+
+            Utils.openLiveWallpaperIntent(this)
         }
 
         //update background card color and text from preferences
@@ -87,8 +104,10 @@ class PotatoActivity : AppCompatActivity() {
 
         colorsAdapter.onColorClick = { combo ->
 
-            mPotatoPreferences.isBackgroundAccented = false
-            mPotatoPreferences.isPotatoAccented = false
+            sBackgroundAccentSet = false
+            sPotatoAccentSet = false
+            sBackgroundColorChanged = true
+            sPotatoColorChanged = true
 
             runOnUiThread {
                 //update background card color and fab tint
@@ -100,8 +119,8 @@ class PotatoActivity : AppCompatActivity() {
                 setPotatoColorForUI(comboPotatoColor, false)
 
                 //save the colors to preferences so we can retrieve in lp
-                mPotatoPreferences.backgroundColor = comboBackgroundColor
-                mPotatoPreferences.potatoColor = comboPotatoColor
+                sBackgroundColorChanged = true
+                sPotatoColorChanged = true
             }
         }
 
@@ -115,6 +134,7 @@ class PotatoActivity : AppCompatActivity() {
 
         //if system accent has changed update preferences on resume with the new accent
         if (isSystemAccentChanged) {
+            //sBackgroundAccentSet = true
             mPotatoPreferences.backgroundColor = mBackgroundColor
         }
 
@@ -160,32 +180,24 @@ class PotatoActivity : AppCompatActivity() {
 
     //set system accent as background color
     fun setSystemAccentForBackground(view: View) {
+        sBackgroundAccentSet = true
         val systemAccent = Utils.getSystemAccentColor(this)
-        mPotatoPreferences.backgroundColor = systemAccent
-        mPotatoPreferences.isBackgroundAccented = true
-
         setBackgroundColorForUI(systemAccent, false)
     }
 
     //set system accent as potato color
     fun setSystemAccentForPotato(view: View) {
-
+        sPotatoAccentSet = true
         val systemAccent = Utils.getSystemAccentColor(this)
-        mPotatoPreferences.potatoColor = systemAccent
-        mPotatoPreferences.isPotatoAccented = true
-
         setPotatoColorForUI(systemAccent, false)
     }
 
     //restore default background and potato colors
     private fun setDefaultPotato() {
-        val defaultBackgroundColor = ContextCompat.getColor(this, R.color.default_background_color)
-        val defaultPotatoColor = ContextCompat.getColor(this, R.color.default_potato_color)
-        setBackgroundColorForUI(defaultBackgroundColor, false)
-        setPotatoColorForUI(defaultPotatoColor, false)
 
-        //clear preferences
-        mPotatoPreferences.clear()
+        sDefaultColorsRestored = true
+        setBackgroundColorForUI(ContextCompat.getColor(this, R.color.default_background_color), false)
+        setPotatoColorForUI(ContextCompat.getColor(this, R.color.default_potato_color), false)
     }
 
     //start material dialog
@@ -205,17 +217,17 @@ class PotatoActivity : AppCompatActivity() {
                     getString(R.string.background_color_key) -> {
                         //update the color only if it really changed
                         if (mBackgroundColor != color) {
+                            sBackgroundColorChanged = true
+                            sBackgroundAccentSet = false
                             setBackgroundColorForUI(color, false)
-                            mPotatoPreferences.isBackgroundAccented = false
-                            mPotatoPreferences.backgroundColor = color
                         }
                     }
                     else -> {
                         //update the color only if it really changed
                         if (mPotatoColor != color) {
+                            sPotatoColorChanged = true
+                            sPotatoAccentSet = false
                             setPotatoColorForUI(color, false)
-                            mPotatoPreferences.isPotatoAccented = false
-                            mPotatoPreferences.potatoColor = color
                         }
                     }
                 }
