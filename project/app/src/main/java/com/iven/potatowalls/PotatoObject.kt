@@ -1,5 +1,6 @@
 package com.iven.potatowalls
 
+import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Matrix
 import android.graphics.Paint
@@ -9,6 +10,7 @@ import androidx.annotation.NonNull
 object PotatoObject {
 
     fun draw(
+        @NonNull context: Context,
         @NonNull c: Canvas?,
         @NonNull backgroundPaint: Paint,
         @NonNull potatoPaint: Paint,
@@ -58,7 +60,7 @@ object PotatoObject {
             strokePaint.style = Paint.Style.STROKE
             strokePaint.strokeWidth = 5F
             strokePaint.isAntiAlias = true
-            strokePaint.color = Utils.getTextColorForCard(backgroundPaint.color)
+            strokePaint.color = Utils.getTextColorForWhatever(context, backgroundPaint.color)
             c?.drawPath(potatoPath, strokePaint)
         }
     }

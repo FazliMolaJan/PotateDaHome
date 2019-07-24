@@ -12,6 +12,9 @@
     <color name="systemBarsColorDark">#313131</color>
     <color name="activityBackgroundDark">#424242</color>
 
+    <color name="dark_mode_text">#99000000</color>
+    <color name="light_mode_text">#E5FFFFFF</color>
+
     <!--  PRESETS -->
 
     <color name="midnightBlue">#1E1F26</color>

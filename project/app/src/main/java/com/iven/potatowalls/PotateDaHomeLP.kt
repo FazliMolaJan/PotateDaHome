@@ -103,6 +103,7 @@ class PotateDaHomeLP : WallpaperService() {
                 if (canvas != null && baseContext != null) {
                     //draw potato!
                     PotatoObject.draw(
+                        baseContext,
                         canvas, mBackgroundPaint, mPotatoPaint, mStrokePaint,
                         mPotatoMatrix, mPotatoPath, mDeviceWidth, mDeviceHeight
                     )
