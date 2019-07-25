@@ -21,10 +21,12 @@
                   android:layout_height="wrap_content"
                   android:text="@string/title_presets"
                   android:textColor="?attr/presets_text_color"
-                  android:padding="16dp"
+                  android:paddingTop="8dp"
+                  android:paddingBottom="8dp"
+                  android:paddingStart="16dp"
+                  android:paddingEnd="16dp"
                   android:textSize="20sp"
-                  android:textStyle="bold"
-                  android:textAppearance="@android:style/TextAppearance.Material.Headline"/>
+                  android:textStyle="bold"/>
 
         <!-- COLORS OPTIONS -->
         <androidx.recyclerview.widget.RecyclerView

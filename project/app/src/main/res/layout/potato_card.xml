@@ -24,10 +24,12 @@
                   android:layout_height="wrap_content"
                   android:text="@string/title_potato"
                   android:id="@+id/potato_color_head"
-                  android:padding="16dp"
+                  android:paddingTop="8dp"
+                  android:paddingBottom="8dp"
+                  android:paddingStart="16dp"
+                  android:paddingEnd="16dp"
                   android:textSize="20sp"
-                  android:textStyle="bold"
-                  android:textAppearance="@android:style/TextAppearance.Material.Headline"/>
+                  android:textStyle="bold"/>
 
         <TextView android:layout_width="match_parent"
                   android:layout_height="wrap_content"
@@ -35,9 +37,8 @@
                   android:paddingBottom="8dp"
                   android:paddingStart="16dp"
                   android:paddingEnd="16dp"
-                  android:alpha="0.5"
                   android:id="@+id/potato_color_subhead"
-                  android:textAppearance="@android:style/TextAppearance.Material.Subhead"/>
+                  android:textAppearance="@android:style/TextAppearance.Material.Small"/>
     </LinearLayout>
 
     <ImageButton
