@@ -37,8 +37,4 @@ class PotatoPreferences(context: Context) {
     var theme: Int
         get() = mPrefs.getInt(prefTheme, R.style.AppTheme)
         set(value) = mPrefs.edit().putInt(prefTheme, value).apply()
-
-    fun clear() {
-        mPrefs.edit().clear().apply()
-    }
 }

@@ -13,7 +13,7 @@
                   android:text="@string/potato_header"
                   android:textColor="?attr/potato_header_color"
                   android:padding="32dp"
-                  android:textSize="56sp"/>
+                  android:textSize="64sp"/>
 
         <include layout="@layout/background_card"/>
 

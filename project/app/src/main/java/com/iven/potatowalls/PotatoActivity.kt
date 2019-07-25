@@ -22,7 +22,6 @@ import kotlinx.android.synthetic.main.potato_activity.*
 import kotlinx.android.synthetic.main.potato_card.*
 import kotlinx.android.synthetic.main.presets_card.*
 
-
 @Suppress("UNUSED_PARAMETER")
 class PotatoActivity : AppCompatActivity() {
 
@@ -35,7 +34,6 @@ class PotatoActivity : AppCompatActivity() {
 
     private var sBackgroundColorChanged = false
     private var sPotatoColorChanged = false
-    private var sDefaultColorsRestored = false
     private var sBackgroundAccentSet = false
     private var sPotatoAccentSet = false
 
@@ -78,8 +76,6 @@ class PotatoActivity : AppCompatActivity() {
                 mPotatoPreferences.potatoColor = mBackgroundColor
             }
 
-            if (sDefaultColorsRestored) mPotatoPreferences.clear()
-
             Utils.openLiveWallpaperIntent(this)
         }
 
@@ -117,10 +113,7 @@ class PotatoActivity : AppCompatActivity() {
 
         colorsAdapter.onColorClick = { combo ->
 
-            sBackgroundAccentSet = false
-            sPotatoAccentSet = false
-            sBackgroundColorChanged = true
-            sPotatoColorChanged = true
+            setBackgroundAndPotatoColorsChanged()
 
             runOnUiThread {
                 //update background card color and fab tint
@@ -206,9 +199,10 @@ class PotatoActivity : AppCompatActivity() {
     //restore default background and potato colors
     private fun setDefaultPotato() {
 
-        sDefaultColorsRestored = true
         setBackgroundColorForUI(ContextCompat.getColor(this, R.color.default_background_color), false)
         setPotatoColorForUI(ContextCompat.getColor(this, R.color.default_potato_color), false)
+
+        setBackgroundAndPotatoColorsChanged()
     }
 
     //start material dialog
@@ -245,6 +239,13 @@ class PotatoActivity : AppCompatActivity() {
             }
             positiveButton(android.R.string.ok)
         }
+    }
+
+    private fun setBackgroundAndPotatoColorsChanged() {
+        sBackgroundAccentSet = false
+        sPotatoAccentSet = false
+        sBackgroundColorChanged = true
+        sPotatoColorChanged = true
     }
 
     //method to start background color picker for background
