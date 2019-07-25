@@ -10,7 +10,6 @@
         android:elevation="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         app:cardCornerRadius="16dp"
         tools:context=".PotatoActivity">
@@ -26,7 +25,7 @@
                   android:layout_height="wrap_content"
                   android:text="@string/title_background"
                   android:paddingTop="8dp"
-                  android:paddingBottom="8dp"
+                  android:paddingBottom="4dp"
                   android:paddingStart="16dp"
                   android:paddingEnd="16dp"
                   android:textSize="20sp"

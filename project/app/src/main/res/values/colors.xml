@@ -4,16 +4,16 @@
     <color name="default_background_color">#292E33</color>
     <color name="default_potato_color">#8C9EFF</color>
 
+    <color name="potato_header_color">#C8C8C8</color>
     <color name="bottom_bar_color">#FAFAFA</color>
     <color name="system_bars_color">#BFBFBF</color>
-    <color name="activity_background">#FFFFFF</color>
+    <color name="activity_background_color">#FFFFFF</color>
 
+    <color name="potato_header_color_dark">#717171</color>
+    <color name="presets_card_color_dark">#595959</color>
     <color name="bottom_bar_color_dark">#303030</color>
     <color name="system_bars_color_dark">#313131</color>
-    <color name="activity_background_dark">#424242</color>
-
-    <color name="dark_mode_text">#99000000</color>
-    <color name="light_mode_text">#E5FFFFFF</color>
+    <color name="activity_background_color_dark">#424242</color>
 
     <!--  PRESETS -->
 

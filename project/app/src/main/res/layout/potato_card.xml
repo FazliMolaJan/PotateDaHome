@@ -25,7 +25,7 @@
                   android:text="@string/title_potato"
                   android:id="@+id/potato_color_head"
                   android:paddingTop="8dp"
-                  android:paddingBottom="8dp"
+                  android:paddingBottom="4dp"
                   android:paddingStart="16dp"
                   android:paddingEnd="16dp"
                   android:textSize="20sp"

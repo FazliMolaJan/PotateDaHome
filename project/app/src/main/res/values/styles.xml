@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <attr name="potato_header_color" format="color"/>
     <attr name="bottom_bar_color" format="color"/>
+    <attr name="presets_card_color" format="color"/>
     <attr name="icons_color" format="color"/>
     <attr name="presets_text_color" format="color"/>
 
@@ -12,6 +14,8 @@
         <item name="android:colorPrimary">@color/system_bars_color</item>
         <item name="android:colorPrimaryDark">@color/system_bars_color</item>
         <item name="android:windowBackground">@color/activity_background_color</item>
+        <item name="potato_header_color">@color/potato_header_color</item>
+        <item name="presets_card_color">@color/bottom_bar_color</item>
         <item name="bottom_bar_color">@color/bottom_bar_color</item>
         <item name="icons_color">@android:color/black</item>
         <item name="presets_text_color">@android:color/black</item>
@@ -24,6 +28,8 @@
         <item name="android:colorPrimary">@color/system_bars_color_dark</item>
         <item name="android:colorPrimaryDark">@color/system_bars_color_dark</item>
         <item name="android:windowBackground">@color/activity_background_color_dark</item>
+        <item name="potato_header_color">@color/potato_header_color_dark</item>
+        <item name="presets_card_color">@color/presets_card_color_dark</item>
         <item name="bottom_bar_color">@color/bottom_bar_color_dark</item>
         <item name="icons_color">@android:color/white</item>
         <item name="presets_text_color">@android:color/white</item>
