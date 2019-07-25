@@ -123,10 +123,6 @@ class PotatoActivity : AppCompatActivity() {
                 //update potato card color and fab check drawable
                 val comboPotatoColor = ContextCompat.getColor(this, combo.second)
                 setPotatoColorForUI(comboPotatoColor, false)
-
-                //save the colors to preferences so we can retrieve in lp
-                sBackgroundColorChanged = true
-                sPotatoColorChanged = true
             }
         }
 
