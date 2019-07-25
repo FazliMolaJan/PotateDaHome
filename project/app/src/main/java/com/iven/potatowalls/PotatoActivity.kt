@@ -212,7 +212,7 @@ class PotatoActivity : AppCompatActivity() {
 
             ) { _, color ->
                 when (key) {
-                    getString(R.string.background_key) -> {
+                    getString(R.string.background_color_key) -> {
                         //update the color only if it really changed
                         if (mBackgroundColor != color) {
                             sBackgroundColorChanged = true
@@ -237,7 +237,7 @@ class PotatoActivity : AppCompatActivity() {
     //method to start background color picker for background
     fun startBackgroundColorPicker(view: View) {
         startColorPicker(
-            getString(R.string.background_key),
+            getString(R.string.background_color_key),
             getString(R.string.title_background)
         )
     }
@@ -245,7 +245,7 @@ class PotatoActivity : AppCompatActivity() {
     //method to start potato color picker for background
     fun startPotatoColorPicker(view: View) {
         startColorPicker(
-            getString(R.string.potato_key),
+            getString(R.string.potato_color_key),
             getString(R.string.title_potato)
         )
     }
