@@ -5,11 +5,13 @@
     <color name="default_potato_color">#8C9EFF</color>
 
     <color name="potato_header_color">#C8C8C8</color>
+    <color name="posp_logo_color">#F2F2F2</color>
     <color name="bottom_bar_color">#FAFAFA</color>
     <color name="system_bars_color">#BFBFBF</color>
     <color name="activity_background_color">#FFFFFF</color>
 
     <color name="potato_header_color_dark">#717171</color>
+    <color name="posp_logo_color_dark">#4C4C4C</color>
     <color name="presets_card_color_dark">#595959</color>
     <color name="bottom_bar_color_dark">#303030</color>
     <color name="system_bars_color_dark">#313131</color>

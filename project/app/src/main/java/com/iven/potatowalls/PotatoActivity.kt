@@ -5,6 +5,8 @@ import android.content.res.ColorStateList
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.view.ViewTreeObserver
+import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -15,9 +17,11 @@ import com.afollestad.materialdialogs.color.ColorPalette
 import com.afollestad.materialdialogs.color.colorChooser
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.background_card.*
+import kotlinx.android.synthetic.main.cards_layout.*
 import kotlinx.android.synthetic.main.potato_activity.*
 import kotlinx.android.synthetic.main.potato_card.*
 import kotlinx.android.synthetic.main.presets_card.*
+
 
 @Suppress("UNUSED_PARAMETER")
 class PotatoActivity : AppCompatActivity() {
@@ -88,13 +92,22 @@ class PotatoActivity : AppCompatActivity() {
         setPotatoColorForUI(mPotatoColor, false)
 
         //set the bottom bar menu
-        bar.setOnMenuItemClickListener {
+        val bottomBar = bar
+        bottomBar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.app_bar_info -> openGitHubPage()
                 R.id.app_bar_theme -> setNewTheme()
                 R.id.app_bar_restore -> setDefaultPotato()
             }
             return@setOnMenuItemClickListener true
+        }
+
+        //set bottom margin to show posp logo on top of the bottom bar
+        bottomBar.afterMeasured {
+            val pospLogo = posp_logo
+            val lp = pospLogo.layoutParams as FrameLayout.LayoutParams
+            lp.setMargins(0, 0, 0, height)
+            pospLogo.layoutParams = lp
         }
 
         //setup presets
@@ -313,5 +326,18 @@ class PotatoActivity : AppCompatActivity() {
         //check if a browser is present
         if (openGitHubPageIntent.resolveActivity(packageManager) != null) startActivity(openGitHubPageIntent) else
             Toast.makeText(this, getString(R.string.install_browser_message), Toast.LENGTH_SHORT).show()
+    }
+
+    //Generified function to measure layout params
+    //https://antonioleiva.com/kotlin-ongloballayoutlistener/
+    private inline fun <T : View> T.afterMeasured(crossinline f: T.() -> Unit) {
+        viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                if (measuredWidth > 0 && measuredHeight > 0) {
+                    viewTreeObserver.removeOnGlobalLayoutListener(this)
+                    f()
+                }
+            }
+        })
     }
 }

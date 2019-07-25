@@ -2,6 +2,7 @@
 <resources>
 
     <attr name="potato_header_color" format="color"/>
+    <attr name="posp_logo_color" format="color"/>
     <attr name="bottom_bar_color" format="color"/>
     <attr name="presets_card_color" format="color"/>
     <attr name="icons_color" format="color"/>
@@ -15,6 +16,7 @@
         <item name="android:colorPrimaryDark">@color/system_bars_color</item>
         <item name="android:windowBackground">@color/activity_background_color</item>
         <item name="potato_header_color">@color/potato_header_color</item>
+        <item name="posp_logo_color">@color/posp_logo_color</item>
         <item name="presets_card_color">@color/bottom_bar_color</item>
         <item name="bottom_bar_color">@color/bottom_bar_color</item>
         <item name="icons_color">@android:color/black</item>
@@ -29,6 +31,7 @@
         <item name="android:colorPrimaryDark">@color/system_bars_color_dark</item>
         <item name="android:windowBackground">@color/activity_background_color_dark</item>
         <item name="potato_header_color">@color/potato_header_color_dark</item>
+        <item name="posp_logo_color">@color/posp_logo_color_dark</item>
         <item name="presets_card_color">@color/presets_card_color_dark</item>
         <item name="bottom_bar_color">@color/bottom_bar_color_dark</item>
         <item name="icons_color">@android:color/white</item>
