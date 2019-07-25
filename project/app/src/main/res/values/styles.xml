@@ -10,7 +10,6 @@
 
     <!-- Base theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="android:colorControlActivated">@color/system_bars_color</item>
         <item name="android:colorAccent">@color/system_bars_color</item>
         <item name="android:colorPrimary">@color/system_bars_color</item>
         <item name="android:colorPrimaryDark">@color/system_bars_color</item>
@@ -25,7 +24,6 @@
     </style>
 
     <style name="AppTheme.Dark" parent="Theme.MaterialComponents.NoActionBar">
-        <item name="android:colorControlActivated">@color/system_bars_color_dark</item>
         <item name="android:colorAccent">@color/system_bars_color_dark</item>
         <item name="android:colorPrimary">@color/system_bars_color_dark</item>
         <item name="android:colorPrimaryDark">@color/system_bars_color_dark</item>
