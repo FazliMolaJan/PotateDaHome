@@ -8,7 +8,8 @@
         android:layout_height="wrap_content"
         app:cardBackgroundColor="?attr/bottom_bar_color"
         android:elevation="16dp"
-        android:layout_margin="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         tools:context=".PotatoActivity">
 
     <LinearLayout
@@ -21,6 +22,8 @@
                   android:text="@string/title_presets"
                   android:textColor="?attr/presets_text_color"
                   android:padding="16dp"
+                  android:textSize="20sp"
+                  android:textStyle="bold"
                   android:textAppearance="@android:style/TextAppearance.Material.Headline"/>
 
         <!-- COLORS OPTIONS -->
@@ -28,7 +31,7 @@
                 android:id="@+id/colors_rv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="16dp"
+                android:paddingBottom="8dp"
                 android:paddingStart="16dp"
                 android:paddingEnd="16dp"
                 tools:context=".MainActivity"/>

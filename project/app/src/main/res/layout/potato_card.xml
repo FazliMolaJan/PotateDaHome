@@ -8,7 +8,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/default_potato_color" android:elevation="16dp"
-        android:layout_margin="8dp" tools:context=".PotatoActivity">
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        tools:context=".PotatoActivity">
 
     <LinearLayout
             android:foreground="?android:attr/selectableItemBackgroundBorderless"
@@ -22,14 +25,17 @@
                   android:text="@string/title_potato"
                   android:id="@+id/potato_color_head"
                   android:padding="16dp"
+                  android:textSize="20sp"
+                  android:textStyle="bold"
                   android:textAppearance="@android:style/TextAppearance.Material.Headline"/>
 
         <TextView android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:text="@string/title_potato"
-                  android:paddingBottom="16dp"
+                  android:paddingBottom="8dp"
                   android:paddingStart="16dp"
                   android:paddingEnd="16dp"
+                  android:alpha="0.5"
                   android:id="@+id/potato_color_subhead"
                   android:textAppearance="@android:style/TextAppearance.Material.Subhead"/>
     </LinearLayout>
@@ -43,6 +49,7 @@
             android:layout_margin="8dp"
             android:id="@+id/potato_system_accent"
             android:onClick="setSystemAccentForPotato"
+            android:alpha="0.5"
             android:background="?android:attr/actionBarItemBackground"
             android:src="@drawable/ic_theme_accent"/>
 

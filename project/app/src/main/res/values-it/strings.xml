@@ -7,6 +7,7 @@
     <!-- Items del menu della BottomBar -->
     <string name="title_theme">Tema</string>
     <string name="title_restore">Ripristina patata default</string>
+    <string name="title_set_accent">Imposta accento sistema!</string>
 
     <string name="install_browser_message">Installa un browser prima!</string>
 </resources>

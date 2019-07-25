@@ -6,6 +6,7 @@ import android.graphics.Matrix
 import android.graphics.Paint
 import android.graphics.Path
 import androidx.annotation.NonNull
+import androidx.core.graphics.ColorUtils
 
 object PotatoObject {
 
@@ -60,7 +61,7 @@ object PotatoObject {
             strokePaint.style = Paint.Style.STROKE
             strokePaint.strokeWidth = 5F
             strokePaint.isAntiAlias = true
-            strokePaint.color = Utils.getTextColorForWhatever(context, backgroundPaint.color)
+            strokePaint.color = ColorUtils.setAlphaComponent(Utils.getSecondaryColor(backgroundPaint.color), 255 / 2)
             c?.drawPath(potatoPath, strokePaint)
         }
     }

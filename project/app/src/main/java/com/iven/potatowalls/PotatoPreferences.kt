@@ -10,8 +10,8 @@ class PotatoPreferences(context: Context) {
     private val mDefaultBackgroundColor = ContextCompat.getColor(context, R.color.default_background_color)
     private val mDefaultPotatoColor = ContextCompat.getColor(context, R.color.default_potato_color)
 
-    private val prefBackgroundColor = context.getString(R.string.background_color_key)
-    private val prefPotatoColor = context.getString(R.string.potato_color_key)
+    private val prefBackgroundColor = context.getString(R.string.background_key)
+    private val prefPotatoColor = context.getString(R.string.potato_key)
     private val prefIsBackgroundAccented = context.getString(R.string.accent_background_set)
     private val prefIsPotatoAccented = context.getString(R.string.accent_potato_set)
     private val prefTheme = context.getString(R.string.theme_key)

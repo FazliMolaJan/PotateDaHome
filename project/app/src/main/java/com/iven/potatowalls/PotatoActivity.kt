@@ -141,16 +141,15 @@ class PotatoActivity : AppCompatActivity() {
         //update shit colors
         runOnUiThread {
             background_color.setCardBackgroundColor(color)
-            val titleTextColor = Utils.getTextColorForCardTitles(color)
-            val whateverColor = Utils.getTextColorForWhatever(this, color)
-            background_color_head.setTextColor(titleTextColor)
-            background_color_subhead.setTextColor(whateverColor)
+            val textColor = Utils.getSecondaryColor(color)
+            background_color_head.setTextColor(textColor)
+            background_color_subhead.setTextColor(textColor)
             background_color_subhead.text = getHexCode(color)
             mFab.backgroundTintList = ColorStateList.valueOf(color)
-            background_system_accent.drawable.setTint(whateverColor)
+            background_system_accent.drawable.setTint(textColor)
 
             //check if colors are the same so we enable stroke to make potato visible
-            val fabDrawableColor = if (checkIfColorsEquals()) whateverColor else mPotatoColor
+            val fabDrawableColor = if (checkIfColorsEquals()) textColor else mPotatoColor
             mFab.drawable.setTint(fabDrawableColor)
         }
     }
@@ -165,15 +164,14 @@ class PotatoActivity : AppCompatActivity() {
         //update shit colors
         runOnUiThread {
             potato_color.setCardBackgroundColor(color)
-            val titleTextColor = Utils.getTextColorForCardTitles(color)
-            val whateverColor = Utils.getTextColorForWhatever(this, color)
-            potato_color_head.setTextColor(titleTextColor)
-            potato_color_subhead.setTextColor(whateverColor)
+            val textColor = Utils.getSecondaryColor(color)
+            potato_color_head.setTextColor(textColor)
+            potato_color_subhead.setTextColor(textColor)
             potato_color_subhead.text = getHexCode(color)
-            potato_system_accent.drawable.setTint(whateverColor)
+            potato_system_accent.drawable.setTint(textColor)
 
             //check if colors are the same so we enable stroke to make potato visible
-            val fabDrawableColor = if (checkIfColorsEquals()) whateverColor else color
+            val fabDrawableColor = if (checkIfColorsEquals()) textColor else color
             mFab.drawable.setTint(fabDrawableColor)
         }
     }
@@ -214,7 +212,7 @@ class PotatoActivity : AppCompatActivity() {
 
             ) { _, color ->
                 when (key) {
-                    getString(R.string.background_color_key) -> {
+                    getString(R.string.background_key) -> {
                         //update the color only if it really changed
                         if (mBackgroundColor != color) {
                             sBackgroundColorChanged = true
@@ -239,7 +237,7 @@ class PotatoActivity : AppCompatActivity() {
     //method to start background color picker for background
     fun startBackgroundColorPicker(view: View) {
         startColorPicker(
-            getString(R.string.background_color_key),
+            getString(R.string.background_key),
             getString(R.string.title_background)
         )
     }
@@ -247,7 +245,7 @@ class PotatoActivity : AppCompatActivity() {
     //method to start potato color picker for background
     fun startPotatoColorPicker(view: View) {
         startColorPicker(
-            getString(R.string.potato_color_key),
+            getString(R.string.potato_key),
             getString(R.string.title_potato)
         )
     }
