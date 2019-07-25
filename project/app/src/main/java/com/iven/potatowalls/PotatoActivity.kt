@@ -73,7 +73,7 @@ class PotatoActivity : AppCompatActivity() {
             }
             if (sPotatoAccentSet) {
                 mPotatoPreferences.isPotatoAccented = true
-                mPotatoPreferences.potatoColor = mBackgroundColor
+                mPotatoPreferences.potatoColor = mPotatoColor
             }
 
             Utils.openLiveWallpaperIntent(this)
