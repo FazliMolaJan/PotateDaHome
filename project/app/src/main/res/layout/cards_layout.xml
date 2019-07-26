@@ -12,8 +12,8 @@
                   android:layout_height="wrap_content"
                   android:text="@string/potato_header"
                   android:textColor="?attr/potato_header_color"
-                  android:padding="32dp"
-                  android:textSize="64sp"/>
+                  android:padding="24dp"
+                  android:textSize="58sp"/>
 
         <include layout="@layout/background_card"/>
 
