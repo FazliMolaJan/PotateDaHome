@@ -202,10 +202,8 @@ class PotatoActivity : AppCompatActivity() {
     }
 
     //start material dialog
-    private fun startColorPicker(key: String, title: String) {
+    private fun startColorPicker(key: String) {
         MaterialDialog(this).show {
-
-            title(text = title)
 
             colorChooser(
                 colors = ColorPalette.Primary,
@@ -246,18 +244,12 @@ class PotatoActivity : AppCompatActivity() {
 
     //method to start background color picker for background
     fun startBackgroundColorPicker(view: View) {
-        startColorPicker(
-            getString(R.string.background_color_key),
-            getString(R.string.title_background)
-        )
+        startColorPicker(getString(R.string.background_color_key))
     }
 
     //method to start potato color picker for background
     fun startPotatoColorPicker(view: View) {
-        startColorPicker(
-            getString(R.string.potato_color_key),
-            getString(R.string.title_potato)
-        )
+        startColorPicker(getString(R.string.potato_color_key))
     }
 
     //update theme
