@@ -1,13 +1,13 @@
 <resources>
 
     <!-- Titoli cards -->
-    <string name="title_background">Colore sfondo</string>
-    <string name="title_potato">Colore patata</string>
+    <string name="title_background">Sfondo</string>
+    <string name="title_potato">Patata</string>
+    <string name="title_accent_me">ACCENTAMI!</string>
 
     <!-- Items del menu della BottomBar -->
     <string name="title_theme">Tema</string>
     <string name="title_restore">Ripristina patata default</string>
-    <string name="title_set_accent">Imposta accento sistema!</string>
 
     <string name="install_browser_message">Installa un browser prima!</string>
 </resources>

@@ -2,6 +2,7 @@ package com.iven.potatowalls
 
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
@@ -10,11 +11,13 @@ import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.ColorUtils
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.color.ColorPalette
 import com.afollestad.materialdialogs.color.colorChooser
+import com.google.android.material.chip.Chip
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.background_card.*
 import kotlinx.android.synthetic.main.cards_layout.*
@@ -31,6 +34,8 @@ class PotatoActivity : AppCompatActivity() {
     private var mPotatoColor = 0
 
     private lateinit var mFab: FloatingActionButton
+    private lateinit var mBackgroundSystemAccentGrabber: Chip
+    private lateinit var mPotatoSystemAccentGrabber: Chip
 
     private var sBackgroundColorChanged = false
     private var sPotatoColorChanged = false
@@ -51,6 +56,10 @@ class PotatoActivity : AppCompatActivity() {
         setTheme(mTheme)
 
         setContentView(R.layout.potato_activity)
+
+        //get system accent grabbers
+        mBackgroundSystemAccentGrabber = background_system_accent
+        mPotatoSystemAccentGrabber = potato_system_accent
 
         //get the fab (don't move from this position)
         mFab = fab
@@ -126,8 +135,20 @@ class PotatoActivity : AppCompatActivity() {
             }
         }
 
-        //setup long click behaviour on system accent buttons
-        setAccentButtonsMessage(background_system_accent, potato_system_accent)
+        //setup system accent buttons
+        setSystemAccentGrabberColor()
+    }
+
+    private fun setSystemAccentGrabberColor() {
+        runOnUiThread {
+            //apply a transparent background to improve accent me visibility
+            val transparentBackground = ColorUtils.setAlphaComponent(Color.BLACK, (255 * 0.50F).toInt())
+            background_system_accent.chipBackgroundColor = ColorStateList.valueOf(transparentBackground)
+            background_system_accent.setTextColor(Utils.getSystemAccentColor(this))
+
+            potato_system_accent.chipBackgroundColor = ColorStateList.valueOf(transparentBackground)
+            potato_system_accent.setTextColor(Utils.getSystemAccentColor(this))
+        }
     }
 
     //update background card colors
@@ -136,7 +157,7 @@ class PotatoActivity : AppCompatActivity() {
 
         //if system accent has changed update preferences on resume with the new accent
         if (isSystemAccentChanged) {
-            //sBackgroundAccentSet = true
+            setSystemAccentGrabberColor()
             mPotatoPreferences.backgroundColor = mBackgroundColor
         }
 
@@ -148,7 +169,6 @@ class PotatoActivity : AppCompatActivity() {
             background_color_subhead.setTextColor(textColor)
             background_color_subhead.text = getHexCode(color)
             mFab.backgroundTintList = ColorStateList.valueOf(color)
-            background_system_accent.drawable.setTint(textColor)
 
             //check if colors are the same so we enable stroke to make potato visible
             val fabDrawableColor = if (checkIfColorsEquals()) textColor else mPotatoColor
@@ -161,7 +181,10 @@ class PotatoActivity : AppCompatActivity() {
         mPotatoColor = color
 
         //if system accent has changed update preferences on resume with the new accent
-        if (isSystemAccentChanged) mPotatoPreferences.potatoColor = mPotatoColor
+        if (isSystemAccentChanged) {
+            setSystemAccentGrabberColor()
+            mPotatoPreferences.potatoColor = mPotatoColor
+        }
 
         //update shit colors
         runOnUiThread {
@@ -170,7 +193,6 @@ class PotatoActivity : AppCompatActivity() {
             potato_color_head.setTextColor(textColor)
             potato_color_subhead.setTextColor(textColor)
             potato_color_subhead.text = getHexCode(color)
-            potato_system_accent.drawable.setTint(textColor)
 
             //check if colors are the same so we enable stroke to make potato visible
             val fabDrawableColor = if (checkIfColorsEquals()) textColor else color
@@ -271,16 +293,6 @@ class PotatoActivity : AppCompatActivity() {
     //returns formatted hex string
     private fun getHexCode(color: Int): String {
         return getString(R.string.hex, Integer.toHexString(color)).toUpperCase()
-    }
-
-    private fun setAccentButtonsMessage(vararg views: View) {
-        views.forEach {
-            it.setOnLongClickListener {
-                Toast.makeText(this, getString(R.string.title_set_accent), Toast.LENGTH_SHORT)
-                    .show()
-                return@setOnLongClickListener true
-            }
-        }
     }
 
     //method to check if accent theme has changed on resume

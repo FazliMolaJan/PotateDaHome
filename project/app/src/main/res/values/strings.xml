@@ -3,9 +3,10 @@
     <string name="potato_header" translatable="false">Potate da home!</string>
 
     <!-- Card titles -->
-    <string name="title_background">Background color</string>
-    <string name="title_potato">Potato color</string>
+    <string name="title_background">Background</string>
+    <string name="title_potato">Potato</string>
     <string name="title_presets" translatable="false">Presets</string>
+    <string name="title_accent_me">ACCENT ME!</string>
 
     <!-- Preferences keys -->
     <string name="background_color_key" translatable="false">background_key</string>
@@ -17,7 +18,6 @@
     <!-- BottomBar menu items -->
     <string name="title_theme">Theme</string>
     <string name="title_restore">Restore default potato!</string>
-    <string name="title_set_accent">Set system accent!</string>
 
     <string name="app_git_link" translatable="false">https://github.com/enricocid/PotateDaHome</string>
     <string name="install_browser_message">Install a browser first!</string>

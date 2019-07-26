@@ -8,7 +8,7 @@
     <attr name="icons_color" format="color"/>
     <attr name="presets_text_color" format="color"/>
 
-    <!-- Base theme. -->
+    <!-- Base theme light. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:colorAccent">@color/system_bars_color</item>
         <item name="android:colorPrimary">@color/system_bars_color</item>
@@ -23,6 +23,7 @@
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
     </style>
 
+    <!-- Base theme dark. -->
     <style name="AppTheme.Dark" parent="Theme.MaterialComponents.NoActionBar">
         <item name="android:colorAccent">@color/system_bars_color_dark</item>
         <item name="android:colorPrimary">@color/system_bars_color_dark</item>
@@ -35,6 +36,12 @@
         <item name="icons_color">@android:color/white</item>
         <item name="presets_text_color">@android:color/white</item>
         <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
+    </style>
+
+    <!-- Chip text appearance -->
+    <style name="chipTextAppearance" parent="TextAppearance.MaterialComponents.Chip">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <!-- This will set the fade in animation on all the activities by default -->
