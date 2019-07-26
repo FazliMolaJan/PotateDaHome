@@ -41,11 +41,10 @@
 
     <ImageButton
             android:contentDescription="@string/live_wallpaper_name"
-            android:layout_width="@android:dimen/app_icon_size"
-            android:layout_height="@android:dimen/app_icon_size"
-            android:minHeight="@android:dimen/app_icon_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_gravity="end|center"
-            android:layout_margin="8dp"
+            android:padding="16dp"
             android:id="@+id/potato_system_accent"
             android:onClick="setSystemAccentForPotato"
             android:alpha="0.5"
