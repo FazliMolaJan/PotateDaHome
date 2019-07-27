@@ -42,7 +42,6 @@
     <style name="chipTextAppearance" parent="TextAppearance.MaterialComponents.Chip">
         <item name="android:textSize">12sp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/bottom_bar_color</item>
     </style>
 
     <!-- This will set the fade in animation on all the activities by default -->
