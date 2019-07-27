@@ -52,7 +52,6 @@
                 android:onClick="setSystemAccentForBackground"
                 android:textAppearance="@style/chipTextAppearance"
                 android:text="@string/title_accent_me"/>
-        <!--app:chipIcon="@drawable/baseline_brightness_5_black_24"-->
     </LinearLayout>
 
 
