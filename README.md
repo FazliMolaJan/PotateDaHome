@@ -5,9 +5,9 @@
 # <img src ="https://upload.wikimedia.org/wikipedia/commons/b/b5/Kotlin-logo.png" width=24> PotateDaHome
 
 ###### PotateDaHome!
-###### Current version: (7) 1.3
+###### Current version: (8) 1.3.1
 
-![Screenshots](https://raw.githubusercontent.com/enricocid/PotateDaHome/master/potatedahome7.gif) 
+![Screenshots](https://raw.githubusercontent.com/enricocid/PotateDaHome/master/potatedahome8.gif) 
 
 # Downloads
 
