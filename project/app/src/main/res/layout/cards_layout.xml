@@ -5,7 +5,7 @@
 
     <TextView android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:text="@string/potato_header"
+              android:text="@string/live_wallpaper_name"
               android:textColor="?attr/potato_header_color"
               android:layout_marginTop="32dp"
               android:layout_marginStart="32dp"
