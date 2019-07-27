@@ -13,7 +13,7 @@
         <item name="android:colorAccent">@color/system_bars_color</item>
         <item name="android:colorPrimary">@color/system_bars_color</item>
         <item name="android:colorPrimaryDark">@color/system_bars_color</item>
-        <item name="android:windowBackground">@color/activity_background_color</item>
+        <item name="android:windowBackground">@android:color/white</item>
         <item name="potato_header_color">@color/potato_header_color</item>
         <item name="posp_logo_color">@color/posp_logo_color</item>
         <item name="presets_card_color">@color/bottom_bar_color</item>
@@ -42,6 +42,7 @@
     <style name="chipTextAppearance" parent="TextAppearance.MaterialComponents.Chip">
         <item name="android:textSize">12sp</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/bottom_bar_color</item>
     </style>
 
     <!-- This will set the fade in animation on all the activities by default -->

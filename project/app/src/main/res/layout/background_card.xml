@@ -45,6 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginVertical="16dp"
+                app:chipBackgroundColor="@color/activity_background_color_dark"
                 app:chipStrokeWidth="1dp"
                 android:onClick="setSystemAccentForBackground"
                 android:textAppearance="@style/chipTextAppearance"

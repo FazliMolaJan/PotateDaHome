@@ -2,7 +2,6 @@ package com.iven.potatowalls
 
 import android.content.Intent
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
@@ -11,7 +10,6 @@ import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.ColorUtils
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
@@ -134,21 +132,6 @@ class PotatoActivity : AppCompatActivity() {
                 setPotatoColorForUI(comboPotatoColor, false)
             }
         }
-
-        //setup system accent buttons
-        setSystemAccentGrabberColor()
-    }
-
-    private fun setSystemAccentGrabberColor() {
-        runOnUiThread {
-            //apply a transparent background to improve accent me visibility
-            val transparentBackground = ColorUtils.setAlphaComponent(Color.BLACK, (255 * 0.50F).toInt())
-            background_system_accent.chipBackgroundColor = ColorStateList.valueOf(transparentBackground)
-            background_system_accent.setTextColor(Utils.getSystemAccentColor(this))
-
-            potato_system_accent.chipBackgroundColor = ColorStateList.valueOf(transparentBackground)
-            potato_system_accent.setTextColor(Utils.getSystemAccentColor(this))
-        }
     }
 
     //update background card colors
@@ -156,10 +139,7 @@ class PotatoActivity : AppCompatActivity() {
         mBackgroundColor = color
 
         //if system accent has changed update preferences on resume with the new accent
-        if (isSystemAccentChanged) {
-            setSystemAccentGrabberColor()
-            mPotatoPreferences.backgroundColor = mBackgroundColor
-        }
+        if (isSystemAccentChanged) mPotatoPreferences.backgroundColor = mBackgroundColor
 
         //update shit colors
         runOnUiThread {
@@ -181,10 +161,7 @@ class PotatoActivity : AppCompatActivity() {
         mPotatoColor = color
 
         //if system accent has changed update preferences on resume with the new accent
-        if (isSystemAccentChanged) {
-            setSystemAccentGrabberColor()
-            mPotatoPreferences.potatoColor = mPotatoColor
-        }
+        if (isSystemAccentChanged) mPotatoPreferences.potatoColor = mPotatoColor
 
         //update shit colors
         runOnUiThread {
