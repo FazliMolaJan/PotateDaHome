@@ -1,6 +1,5 @@
 package com.iven.potatowalls
 
-import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Matrix
 import android.graphics.Paint
@@ -11,7 +10,6 @@ import androidx.core.graphics.ColorUtils
 object PotatoObject {
 
     fun draw(
-        @NonNull context: Context,
         @NonNull c: Canvas?,
         @NonNull backgroundPaint: Paint,
         @NonNull potatoPaint: Paint,
