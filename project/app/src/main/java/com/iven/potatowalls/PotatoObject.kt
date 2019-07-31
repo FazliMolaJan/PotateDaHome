@@ -13,7 +13,6 @@ object PotatoObject {
         @NonNull c: Canvas?,
         @NonNull backgroundPaint: Paint,
         @NonNull potatoPaint: Paint,
-        @NonNull strokePaint: Paint,
         @NonNull potatoMatrix: Matrix,
         @NonNull potatoPath: Path,
         cw: Float,
@@ -52,15 +51,12 @@ object PotatoObject {
 
         potatoPath.transform(potatoMatrix)
 
-        c?.drawPath(potatoPath, potatoPaint)
-
         //if the color is the same!
         if (backgroundPaint.color == potatoPaint.color) {
-            strokePaint.style = Paint.Style.STROKE
-            strokePaint.strokeWidth = 5F
-            strokePaint.isAntiAlias = true
-            strokePaint.color = ColorUtils.setAlphaComponent(Utils.getSecondaryColor(backgroundPaint.color), 255 / 2)
-            c?.drawPath(potatoPath, strokePaint)
+            potatoPaint.style = Paint.Style.STROKE
+            potatoPaint.strokeWidth = 5F
+            potatoPaint.color = ColorUtils.setAlphaComponent(Utils.getSecondaryColor(backgroundPaint.color), 255 / 2)
         }
+        c?.drawPath(potatoPath, potatoPaint)
     }
 }

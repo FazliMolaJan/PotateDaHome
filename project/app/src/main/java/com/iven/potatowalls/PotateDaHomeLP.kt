@@ -15,7 +15,6 @@ class PotateDaHomeLP : WallpaperService() {
 
     private var mBackgroundPaint = Paint()
     private var mPotatoPaint = Paint()
-    private var mStrokePaint = Paint()
     private var mPotatoPath = Path()
     private var mPotatoMatrix = Matrix()
 
@@ -103,7 +102,7 @@ class PotateDaHomeLP : WallpaperService() {
                 if (canvas != null && baseContext != null) {
                     //draw potato!
                     PotatoObject.draw(
-                        canvas, mBackgroundPaint, mPotatoPaint, mStrokePaint,
+                        canvas, mBackgroundPaint, mPotatoPaint,
                         mPotatoMatrix, mPotatoPath, mDeviceWidth, mDeviceHeight
                     )
                 }
