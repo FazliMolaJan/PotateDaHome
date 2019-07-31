@@ -20,8 +20,8 @@ Simple app to apply colored & minimal potato static live wallpapers I built for 
 
 
 # Credits
-- Colors combo taken from [Canva](https://github.com/afollestad/material-dialogs)!
-- Aidan Follestad for beautiful [Material Dialogs](https://www.canva.com/learn/100-color-combinations/) library
+- Colors combo taken from [Canva](https://www.canva.com/learn/100-color-combinations/)!
+- Aidan Follestad for beautiful [Material Dialogs](https://github.com/afollestad/material-dialogs) library
 
 
 # Notice:
