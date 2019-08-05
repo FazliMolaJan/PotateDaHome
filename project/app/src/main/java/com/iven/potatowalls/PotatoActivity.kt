@@ -2,11 +2,13 @@ package com.iven.potatowalls
 
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.view.ViewTreeObserver
-import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -17,11 +19,14 @@ import com.afollestad.materialdialogs.color.ColorPalette
 import com.afollestad.materialdialogs.color.colorChooser
 import com.google.android.material.chip.Chip
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.android.synthetic.main.background_card.*
-import kotlinx.android.synthetic.main.cards_layout.*
+import com.iven.potatowalls.adapters.ColorsAdapter
+import com.iven.potatowalls.adapters.VectorsAdapter
+import com.iven.potatowalls.ui.Utils
+import kotlinx.android.synthetic.main.background_color_pref_card.*
 import kotlinx.android.synthetic.main.potato_activity.*
-import kotlinx.android.synthetic.main.potato_card.*
 import kotlinx.android.synthetic.main.presets_card.*
+import kotlinx.android.synthetic.main.vector_color_pref_card.*
+import kotlinx.android.synthetic.main.vectors_card.*
 
 @Suppress("UNUSED_PARAMETER")
 class PotatoActivity : AppCompatActivity() {
@@ -29,16 +34,20 @@ class PotatoActivity : AppCompatActivity() {
     private var mTheme = R.style.AppTheme
 
     private var mBackgroundColor = 0
-    private var mPotatoColor = 0
+    private var mVectorColor = 0
+    private var mVector = R.drawable.ic_potato
 
     private lateinit var mFab: FloatingActionButton
+    private lateinit var mVectorFrame: ImageView
     private lateinit var mBackgroundSystemAccentGrabber: Chip
-    private lateinit var mPotatoSystemAccentGrabber: Chip
+    private lateinit var mVectorSystemAccentGrabber: Chip
 
     private var sBackgroundColorChanged = false
-    private var sPotatoColorChanged = false
+    private var sVectorColorChanged = false
     private var sBackgroundAccentSet = false
-    private var sPotatoAccentSet = false
+    private var sVectorAccentSet = false
+
+    private var sVectorChanged = true
 
     override fun onResume() {
         super.onResume()
@@ -57,42 +66,26 @@ class PotatoActivity : AppCompatActivity() {
 
         //get system accent grabbers
         mBackgroundSystemAccentGrabber = background_system_accent
-        mPotatoSystemAccentGrabber = potato_system_accent
+        mVectorSystemAccentGrabber = vector_system_accent
+        mVectorFrame = vector_frame
 
         //get the fab (don't move from this position)
         mFab = fab
 
         //apply live wallpaper on fab click!
         mFab.setOnClickListener {
-
-            //do all the save shit here
-            if (sBackgroundColorChanged) {
-                mPotatoPreferences.isBackgroundAccented = false
-                mPotatoPreferences.backgroundColor = mBackgroundColor
-            }
-            if (sPotatoColorChanged) {
-                mPotatoPreferences.isPotatoAccented = false
-                mPotatoPreferences.potatoColor = mPotatoColor
-            }
-            if (sBackgroundAccentSet) {
-                mPotatoPreferences.isBackgroundAccented = true
-                mPotatoPreferences.backgroundColor = mBackgroundColor
-            }
-            if (sPotatoAccentSet) {
-                mPotatoPreferences.isPotatoAccented = true
-                mPotatoPreferences.potatoColor = mPotatoColor
-            }
-
-            Utils.openLiveWallpaperIntent(this)
+            handleWallpaperChanges()
         }
 
         //update background card color and text from preferences
         mBackgroundColor = mPotatoPreferences.backgroundColor
         setBackgroundColorForUI(mBackgroundColor, false)
 
-        //update potato card color and text from preferences
-        mPotatoColor = mPotatoPreferences.potatoColor
-        setPotatoColorForUI(mPotatoColor, false)
+        //update vector card color and text from preferences
+        mVectorColor = mPotatoPreferences.vectorColor
+        setVectorColorForUI(mVectorColor, false)
+
+        mVector = mPotatoPreferences.vector
 
         //set the bottom bar menu
         val bottomBar = bar
@@ -100,17 +93,9 @@ class PotatoActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.app_bar_info -> openGitHubPage()
                 R.id.app_bar_theme -> setNewTheme()
-                R.id.app_bar_restore -> setDefaultPotato()
+                R.id.app_bar_restore -> setDefaultVectorColors()
             }
             return@setOnMenuItemClickListener true
-        }
-
-        //set bottom margin to show posp logo on top of the bottom bar
-        bottomBar.afterMeasured {
-            val pospLogo = posp_logo
-            val lp = pospLogo.layoutParams as FrameLayout.LayoutParams
-            lp.setMargins(0, 0, 0, height)
-            pospLogo.layoutParams = lp
         }
 
         //setup presets
@@ -120,17 +105,85 @@ class PotatoActivity : AppCompatActivity() {
 
         colorsAdapter.onColorClick = { combo ->
 
-            setBackgroundAndPotatoColorsChanged()
+            setBackgroundAndVectorColorsChanged()
 
             runOnUiThread {
+
                 //update background card color and fab tint
                 val comboBackgroundColor = ContextCompat.getColor(this, combo.first)
                 setBackgroundColorForUI(comboBackgroundColor, false)
 
-                //update potato card color and fab check drawable
-                val comboPotatoColor = ContextCompat.getColor(this, combo.second)
-                setPotatoColorForUI(comboPotatoColor, false)
+                //update vector card color and fab check drawable
+                val comboVectorColor = ContextCompat.getColor(this, combo.second)
+                setVectorColorForUI(comboVectorColor, false)
+
+                //update vector frame colors
+                setVectorFrameColors()
             }
+        }
+
+        //setup presets
+        vectors_rv.layoutManager = LinearLayoutManager(this, RecyclerView.HORIZONTAL, false)
+        val vectorsAdapter = VectorsAdapter(this)
+        vectors_rv.adapter = vectorsAdapter
+
+        vectorsAdapter.onVectorClick = { vector ->
+
+            if (mVector != vector) {
+                mVector = vector!!
+                runOnUiThread { mVectorFrame.setImageResource(mVector) }
+
+                sVectorChanged = true
+            }
+        }
+
+        vectors_rv.scrollToPosition(vectorsAdapter.getVectorPosition(mVector))
+
+        //set vector frame height to match icons rv height
+        vectors_rv.afterMeasured {
+
+            val vectorFrameLayoutParams = mVectorFrame.layoutParams as LinearLayout.LayoutParams
+            vectorFrameLayoutParams.height = (height / 0.75F).toInt()
+            mVectorFrame.layoutParams = vectorFrameLayoutParams
+
+            setVectorFrameColors()
+        }
+    }
+
+    private fun handleWallpaperChanges() {
+        //do all the save shit here
+        if (sBackgroundColorChanged) {
+            mPotatoPreferences.isBackgroundAccented = false
+            mPotatoPreferences.backgroundColor = mBackgroundColor
+        }
+        if (sVectorColorChanged) {
+            mPotatoPreferences.isVectorAccented = false
+            mPotatoPreferences.vectorColor = mVectorColor
+        }
+        if (sBackgroundAccentSet) {
+            mPotatoPreferences.isBackgroundAccented = true
+            mPotatoPreferences.backgroundColor = mBackgroundColor
+        }
+        if (sVectorAccentSet) {
+            mPotatoPreferences.isVectorAccented = true
+            mPotatoPreferences.vectorColor = mVectorColor
+        }
+
+        if (sVectorChanged) mPotatoPreferences.vector = mVector
+
+        val intent = Intent(this, SetWallpaperActivity::class.java)
+        startActivity(intent)
+    }
+
+    //update vector frame
+    private fun setVectorFrameColors() {
+        mVectorFrame.setImageResource(mVector)
+        mVectorFrame.setBackgroundColor(mBackgroundColor)
+        if (mBackgroundColor == mVectorColor) {
+            if (Utils.isColorDark(mVectorColor)) mVectorFrame.setColorFilter(Utils.lightenColor(mVectorColor, 0.20F))
+            else mVectorFrame.setColorFilter(Utils.darkenColor(mVectorColor, 0.20F))
+        } else {
+            mVectorFrame.setColorFilter(mVectorColor)
         }
     }
 
@@ -150,30 +203,34 @@ class PotatoActivity : AppCompatActivity() {
             background_color_subhead.text = getHexCode(color)
             mFab.backgroundTintList = ColorStateList.valueOf(color)
 
-            //check if colors are the same so we enable stroke to make potato visible
-            val fabDrawableColor = if (checkIfColorsEquals()) textColor else mPotatoColor
+            //check if colors are the same so we enable stroke to make vector visible
+            val fabDrawableColor = if (checkIfColorsEquals()) textColor else mVectorColor
             mFab.drawable.setTint(fabDrawableColor)
+
+            setVectorFrameColors()
         }
     }
 
-    //update potato card colors
-    private fun setPotatoColorForUI(color: Int, isSystemAccentChanged: Boolean) {
-        mPotatoColor = color
+    //update vector card colors
+    private fun setVectorColorForUI(color: Int, isSystemAccentChanged: Boolean) {
+        mVectorColor = color
 
         //if system accent has changed update preferences on resume with the new accent
-        if (isSystemAccentChanged) mPotatoPreferences.potatoColor = mPotatoColor
+        if (isSystemAccentChanged) mPotatoPreferences.vectorColor = mVectorColor
 
         //update shit colors
         runOnUiThread {
-            potato_color.setCardBackgroundColor(color)
+            vector_color.setCardBackgroundColor(color)
             val textColor = Utils.getSecondaryColor(color)
-            potato_color_head.setTextColor(textColor)
-            potato_color_subhead.setTextColor(textColor)
-            potato_color_subhead.text = getHexCode(color)
+            vector_color_head.setTextColor(textColor)
+            vector_color_subhead.setTextColor(textColor)
+            vector_color_subhead.text = getHexCode(color)
 
-            //check if colors are the same so we enable stroke to make potato visible
+            //check if colors are the same so we enable stroke to make vector visible
             val fabDrawableColor = if (checkIfColorsEquals()) textColor else color
             mFab.drawable.setTint(fabDrawableColor)
+
+            setVectorFrameColors()
         }
     }
 
@@ -184,20 +241,20 @@ class PotatoActivity : AppCompatActivity() {
         setBackgroundColorForUI(systemAccent, false)
     }
 
-    //set system accent as potato color
-    fun setSystemAccentForPotato(view: View) {
-        sPotatoAccentSet = true
+    //set system accent as vector color
+    fun setSystemAccentForVector(view: View) {
+        sVectorAccentSet = true
         val systemAccent = Utils.getSystemAccentColor(this)
-        setPotatoColorForUI(systemAccent, false)
+        setVectorColorForUI(systemAccent, false)
     }
 
-    //restore default background and potato colors
-    private fun setDefaultPotato() {
+    //restore default background and vector colors
+    private fun setDefaultVectorColors() {
 
-        setBackgroundColorForUI(ContextCompat.getColor(this, R.color.default_background_color), false)
-        setPotatoColorForUI(ContextCompat.getColor(this, R.color.default_potato_color), false)
+        setBackgroundColorForUI(Color.BLACK, false)
+        setVectorColorForUI(Color.WHITE, false)
 
-        setBackgroundAndPotatoColorsChanged()
+        setBackgroundAndVectorColorsChanged()
     }
 
     //start material dialog
@@ -222,10 +279,10 @@ class PotatoActivity : AppCompatActivity() {
                     }
                     else -> {
                         //update the color only if it really changed
-                        if (mPotatoColor != color) {
-                            sPotatoColorChanged = true
-                            sPotatoAccentSet = false
-                            setPotatoColorForUI(color, false)
+                        if (mVectorColor != color) {
+                            sVectorColorChanged = true
+                            sVectorAccentSet = false
+                            setVectorColorForUI(color, false)
                         }
                     }
                 }
@@ -234,11 +291,11 @@ class PotatoActivity : AppCompatActivity() {
         }
     }
 
-    private fun setBackgroundAndPotatoColorsChanged() {
+    private fun setBackgroundAndVectorColorsChanged() {
         sBackgroundAccentSet = false
-        sPotatoAccentSet = false
+        sVectorAccentSet = false
         sBackgroundColorChanged = true
-        sPotatoColorChanged = true
+        sVectorColorChanged = true
     }
 
     //method to start background color picker for background
@@ -246,9 +303,9 @@ class PotatoActivity : AppCompatActivity() {
         startColorPicker(getString(R.string.background_color_key))
     }
 
-    //method to start potato color picker for background
-    fun startPotatoColorPicker(view: View) {
-        startColorPicker(getString(R.string.potato_color_key))
+    //method to start vector color picker for background
+    fun startVectorColorPicker(view: View) {
+        startColorPicker(getString(R.string.vector_color_key))
     }
 
     //update theme
@@ -262,9 +319,9 @@ class PotatoActivity : AppCompatActivity() {
         finish()
     }
 
-    //check if background and potato colors are equals
+    //check if background and vector colors are equals
     private fun checkIfColorsEquals(): Boolean {
-        return mBackgroundColor == mPotatoColor
+        return mBackgroundColor == mVectorColor
     }
 
     //returns formatted hex string
@@ -276,20 +333,20 @@ class PotatoActivity : AppCompatActivity() {
     private fun checkSystemAccent(): Boolean {
 
         val isBackgroundAccented = mPotatoPreferences.isBackgroundAccented
-        val isPotatoAccented = mPotatoPreferences.isPotatoAccented
+        val isVectorAccented = mPotatoPreferences.isVectorAccented
 
-        return if (!isBackgroundAccented && !isPotatoAccented) {
+        return if (!isBackgroundAccented && !isVectorAccented) {
             false
         } else {
             //get system accent color
             val systemAccentColor = Utils.getSystemAccentColor(this)
 
             //if changed, update it!
-            if (systemAccentColor != mPotatoPreferences.backgroundColor || systemAccentColor != mPotatoPreferences.potatoColor) {
+            if (systemAccentColor != mPotatoPreferences.backgroundColor || systemAccentColor != mPotatoPreferences.vectorColor) {
 
                 //update cards colors
                 if (isBackgroundAccented) setBackgroundColorForUI(systemAccentColor, true)
-                if (isPotatoAccented) setPotatoColorForUI(systemAccentColor, true)
+                if (isVectorAccented) setVectorColorForUI(systemAccentColor, true)
             }
             return true
         }

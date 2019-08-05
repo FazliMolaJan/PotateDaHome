@@ -11,7 +11,6 @@
         android:padding="4dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         tools:context=".PotatoActivity">
 
@@ -20,21 +19,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        <TextView android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:text="@string/title_presets"
-                  android:textColor="?attr/presets_text_color"
-                  android:paddingTop="8dp"
-                  android:paddingStart="16dp"
-                  android:paddingEnd="16dp"
-                  android:textAppearance="@android:style/TextAppearance.Material.Title"
-                  android:textStyle="bold"/>
+        <ImageView android:layout_width="match_parent"
+                   android:id="@+id/vector_frame"
+                   android:src="@drawable/ic_potato"
+                   android:padding="8dp"
+                   android:contentDescription="@string/live_wallpaper_name"
+                   android:layout_height="wrap_content"/>
 
-        <!-- COLORS OPTIONS -->
+        <!-- ICONS OPTIONS -->
         <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/colors_rv"
+                android:id="@+id/vectors_rv"
                 android:clipToPadding="false"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
                 android:layout_height="wrap_content"
                 tools:context=".MainActivity"/>
     </LinearLayout>

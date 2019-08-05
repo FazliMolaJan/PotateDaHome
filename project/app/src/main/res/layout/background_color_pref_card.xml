@@ -7,11 +7,12 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/default_background_color"
+        app:cardBackgroundColor="@android:color/black"
         app:cardElevation="4dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginVertical="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         app:cardCornerRadius="8dp"
         tools:context=".PotatoActivity">
 
@@ -27,7 +28,8 @@
                   android:text="@string/title_background"
                   android:paddingTop="8dp"
                   android:paddingBottom="4dp"
-                  android:paddingHorizontal="16dp"
+                  android:paddingStart="16dp"
+                  android:paddingEnd="16dp"
                   android:textAppearance="@android:style/TextAppearance.Material.Title"
                   android:textStyle="bold"
                   android:id="@+id/background_color_head"/>
@@ -36,15 +38,15 @@
                   android:layout_height="wrap_content"
                   android:text="@string/title_background"
                   android:id="@+id/background_color_subhead"
-                  android:paddingHorizontal="16dp"
+                  android:paddingStart="16dp"
+                  android:paddingEnd="16dp"
                   android:textAppearance="@android:style/TextAppearance.Material.Small"/>
 
         <com.google.android.material.chip.Chip
                 android:id="@+id/background_system_accent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginVertical="16dp"
+                android:layout_margin="16dp"
                 app:chipBackgroundColor="@color/activity_background_color_dark"
                 android:alpha="0.5"
                 android:textColor="@color/bottom_bar_color"

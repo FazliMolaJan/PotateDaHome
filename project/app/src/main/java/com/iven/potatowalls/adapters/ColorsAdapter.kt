@@ -1,4 +1,4 @@
-package com.iven.potatowalls
+package com.iven.potatowalls.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,13 +8,14 @@ import androidx.annotation.NonNull
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
+import com.iven.potatowalls.R
 
 class ColorsAdapter(@NonNull private val context: Context) :
     RecyclerView.Adapter<ColorsAdapter.ColorsHolder>() {
 
     var onColorClick: ((Pair<Int, Int>) -> Unit)? = null
 
-    //first = background color, second = potato color
+    //first = background color, second = vector color
     private val mColors = listOf(
         //from https://www.canva.com/learn/100-color-combinations/
         Pair(R.color.midnight_blue, R.color.ink),

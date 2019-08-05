@@ -4,9 +4,10 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
+        android:fitsSystemWindows="true"
         android:layout_height="match_parent">
 
-    <include layout="@layout/cards_layout"/>
+    <include layout="@layout/cards_container"/>
 
     <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bar"

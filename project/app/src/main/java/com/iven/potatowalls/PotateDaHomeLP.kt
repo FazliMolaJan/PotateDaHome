@@ -1,70 +1,51 @@
 package com.iven.potatowalls
 
-import android.content.Context
 import android.graphics.Canvas
-import android.graphics.Matrix
-import android.graphics.Paint
-import android.graphics.Path
+import android.graphics.drawable.VectorDrawable
 import android.os.Handler
 import android.service.wallpaper.WallpaperService
-import android.util.DisplayMetrics
 import android.view.SurfaceHolder
-import android.view.WindowManager
+import androidx.core.content.ContextCompat
+import com.iven.potatowalls.ui.Utils
 
 class PotateDaHomeLP : WallpaperService() {
 
-    private var mBackgroundPaint = Paint()
-    private var mPotatoPaint = Paint()
-    private var mPotatoPath = Path()
-    private var mPotatoMatrix = Matrix()
+    private var mBackgroundColor = 0
+    private var mDrawableColor = 0
+    private var mScaleFactor = 0.35F
 
-    private var mDeviceWidth = 0F
-    private var mDeviceHeight = 0F
+    private var mDeviceWidth = 0
+    private var mDeviceHeight = 0
 
-    //the potato battery live potato_wallpaper service and engine
+    //the vectorify live wallpaper service and engine
     override fun onCreateEngine(): Engine {
 
-        if (baseContext != null) {
-            //retrieve display specifications
-            val window = baseContext.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-            val d = DisplayMetrics()
-            window.defaultDisplay.getRealMetrics(d)
-            mDeviceWidth = d.widthPixels.toFloat()
-            mDeviceHeight = d.heightPixels.toFloat()
+        mDeviceWidth = mDeviceMetrics.first
+        mDeviceHeight = mDeviceMetrics.second
 
-            getPaintProps()
-        }
-
-        return PotatoEngine()
-    }
-
-    private fun getPaintProps() {
         //set paints props
-        mBackgroundPaint.isAntiAlias = true
-        val backgroundColor = mPotatoPreferences.backgroundColor
-        mBackgroundPaint.color = backgroundColor
+        mBackgroundColor = mPotatoPreferences.backgroundColor
+        mDrawableColor = mPotatoPreferences.vectorColor
+        mScaleFactor = mPotatoPreferences.scale
 
-        mPotatoPaint.isAntiAlias = true
-        mPotatoPaint.style = Paint.Style.FILL
-        val potatoColor = mPotatoPreferences.potatoColor
-        mPotatoPaint.color = potatoColor
+        return VectorifyEngine()
     }
 
     private fun checkSystemAccent() {
 
         val isBackgroundAccented = mPotatoPreferences.isBackgroundAccented
-        val isPotatoAccented = mPotatoPreferences.isPotatoAccented
+        val isDrawableAccented = mPotatoPreferences.isVectorAccented
 
-        if (isBackgroundAccented || isPotatoAccented) {
+        if (isBackgroundAccented || isDrawableAccented) {
             //change only if system accent has changed
             val systemAccentColor = Utils.getSystemAccentColor(this)
-            if (isBackgroundAccented && mBackgroundPaint.color != systemAccentColor) mBackgroundPaint.color =
+            if (isBackgroundAccented && mBackgroundColor != systemAccentColor) mBackgroundColor =
                 systemAccentColor
-            if (isPotatoAccented && mPotatoPaint.color != systemAccentColor) mPotatoPaint.color = systemAccentColor
+            if (isDrawableAccented && mDrawableColor != systemAccentColor) mDrawableColor = systemAccentColor
         }
     }
 
-    private inner class PotatoEngine : WallpaperService.Engine() {
+    private inner class VectorifyEngine : WallpaperService.Engine() {
 
         private val handler = Handler()
         private var sVisible = true
@@ -101,10 +82,15 @@ class PotateDaHomeLP : WallpaperService() {
                 canvas = holder.lockCanvas()
                 if (canvas != null && baseContext != null) {
                     //draw potato!
-                    PotatoObject.draw(
-                        canvas, mBackgroundPaint, mPotatoPaint,
-                        mPotatoMatrix, mPotatoPath, mDeviceWidth, mDeviceHeight
-                    )
+                    canvas.drawColor(mBackgroundColor)
+                    val bit = ContextCompat.getDrawable(baseContext, mPotatoPreferences.vector) as VectorDrawable
+                    bit.setTint(mDrawableColor)
+
+                    if (mBackgroundColor == mDrawableColor) {
+                        if (Utils.isColorDark(mDrawableColor)) bit.setTint(Utils.lightenColor(mDrawableColor, 0.20F))
+                        else bit.setTint(Utils.darkenColor(mDrawableColor, 0.20F))
+                    }
+                    Utils.drawBitmap(bit, canvas, mDeviceWidth, mDeviceHeight, mScaleFactor)
                 }
             } finally {
                 if (canvas != null)
