@@ -20,8 +20,6 @@ import androidx.core.graphics.ColorUtils
 import com.iven.potatowalls.PotateDaHomeLP
 import com.iven.potatowalls.R
 import com.iven.potatowalls.mPotatoPreferences
-import java.math.RoundingMode
-import java.text.DecimalFormat
 
 object Utils {
 
@@ -114,11 +112,13 @@ object Utils {
     }
 
     @TargetApi(Build.VERSION_CODES.M)
+    @JvmStatic
     fun checkPermissions(activity: Activity, code: Int) {
         activity.requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), code)
     }
 
     //first: boolean, second: the seekbar max value
+    @JvmStatic
     fun isPospFull(): Pair<Boolean, Int> {
 
         val isPospFull = mPotatoPreferences.vector == R.drawable.ic_potato_full
@@ -126,9 +126,15 @@ object Utils {
         return Pair(isPospFull, if (isPospFull) 25 else 100)
     }
 
-    fun getDecimalFormat(number: Float): Float {
-        val df = DecimalFormat("#.#")
-        df.roundingMode = RoundingMode.CEILING
-        return df.format(number).toFloat()
+    //method to get rounded float string
+    @JvmStatic
+    fun getDecimalFormattedString(number: Float): String {
+        var formattedNumber = ""
+        try {
+            formattedNumber = String.format("%.2f", number)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return formattedNumber
     }
 }

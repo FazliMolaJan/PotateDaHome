@@ -161,7 +161,7 @@ class SetWallpaperActivity : AppCompatActivity() {
         seek_size.progress = if (isPospFull.first) (0.25F * seekbarValue).toInt() else seekbarValue.toInt()
 
         //set saved size
-        scale_text.text = Utils.getDecimalFormat(seek_size.progress.toFloat() / isPospFull.second).toString()
+        scale_text.text = Utils.getDecimalFormattedString(seek_size.progress.toFloat() / isPospFull.second)
 
         //observe seekbar changes
         seek_size.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
@@ -174,9 +174,10 @@ class SetWallpaperActivity : AppCompatActivity() {
 
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
 
-                val calculatedSizeForText = Utils.getDecimalFormat(progress.toFloat() / isPospFull.second)
+                val calculatedSizeForText = Utils.getDecimalFormattedString(progress.toFloat() / isPospFull.second)
 
-                if (fromUser && calculatedSizeForText >= 0.20) {
+                val cutOff = if (isPospFull.first) 2 else 10
+                if (fromUser && progress >= cutOff) {
 
                     calculatedScaleFactor =
                         if (isPospFull.first) (progress.toFloat() / 0.25F) / 100 else (progress.toFloat()) / 100
